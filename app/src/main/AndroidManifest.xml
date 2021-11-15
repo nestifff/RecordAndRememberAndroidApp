@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.nestifff.recordrememberproj">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.RecordRemember" >
+        <activity
+            android:name=".viewChangeWords.wordsListActivity.WordsListActivity"
+            android:launchMode="singleTask"
+            android:parentActivityName=".viewChangeWords.ChooseSetToViewActivity" />
+        <activity
+            android:name=".viewChangeWords.ChooseSetToViewActivity"
+            android:launchMode="singleTask"
+            android:parentActivityName=".menuMain.MainActivity" />
+        <activity
+            android:name=".learnWords.ChooseSetToLearnActivity"
+            android:launchMode="singleTask"
+            android:parentActivityName=".menuMain.MainActivity" />
+        <activity
+            android:name=".learnWords.LearnWordsActivity"
+            android:parentActivityName=".learnWords.ChooseSetToLearnActivity" />
+        <activity
+            android:name=".menuMain.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

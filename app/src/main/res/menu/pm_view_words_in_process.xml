@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <group android:id="@+id/pm_group_view_words_in_process">
+
+
+        <item
+            android:id="@+id/pm_add_new_word"
+            android:title="@string/new_word_menu_item" />
+
+        <item
+            android:id="@+id/pm_add_words_from_file"
+            android:title="@string/add_words_from_file" />
+
+        <item
+            android:id="@+id/pm_download_words_in_file"
+            android:title="@string/download_all_words_in_txt_file" />
+
+
+    </group>
+
+</menu>

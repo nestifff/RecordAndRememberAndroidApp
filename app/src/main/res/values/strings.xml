@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">Record &amp; Remember</string>
+
+
+    // main activity - choose operation
+    <string name="text_askChooseOption">Choose what you want to do</string>
+    <string name="button_chooseRecallWords">Recall Words</string>
+    <string name="button_chooseLearnWords">Learn Words</string>
+    <string name="button_chooseViewChangeAllWords">View/change all my words</string>
+
+
+    // Choose set to learn activity
+    <string name="text_askChooseSet">Choose word count to learn:</string>
+    <string name="button_chooseSetToLearn5">5 words </string>
+    <string name="button_chooseSetToLearn10">10 words </string>
+    <string name="button_chooseSetToLearn20">20 words </string>
+    <string name="button_chooseSetToLearn30">30 words </string>
+    <string name="button_chooseSetToLearn50">50 words </string>
+
+    // Choose set to view activity
+    <string name="button_showLearnedWords">Learned words</string>
+    <string name="button_showWordsInProcess">Words in process</string>
+
+    // Learn set of words activity
+    <string name="text_wayToLearnInfo">Way to learn:</string>
+    <string name="text_rusEngWayToLearn">RUS => ENG</string>
+    <string name="text_engRusWayToLearn">ENG => RUS</string>
+    <string name="button_changeWayToLearn">Change</string>
+    <string name="text_wordToRecall">Word</string>
+    <string name="textHint_enterAnswerRusEng">Write translate to English</string>
+    <string name="textHint_enterAnswerEngRus">Write translate to Russian</string>
+
+    <string name="text_answerStatusGood">You are right</string>
+    <string name="text_answerStatusWrong">You are wrong, right answer is \n</string>
+    <string name="button_learnNextWord">NEXT > </string>
+
+    // Choose set to view activity
+    <string name="text_askChooseSetToView">Choose set of words to view
+                                            \nor change:</string>
+
+    <string name="button_changeWord">Accept</string>
+
+    <string name="new_word_menu_item">Add word</string>
+
+    <string name="button_clearWordsInProcess">Delete all words in process</string>
+
+    <string name="button_deleteWordFromSet">Delete</string>
+    <string name="create_file_with_words_in_process">Create file with words in process</string>
+    <string name="download_all_words_in_txt_file">Download all words in txt file</string>
+    <string name="add_words_from_file">Add words from file</string>
+    <string name="home"><![CDATA[< HOME]]></string>
+    <string name="russian">Russian:</string>
+    <string name="english">English:</string>
+    <string name="eng">eng:</string>
+    <string name="rus">rus:</string>
+</resources>
