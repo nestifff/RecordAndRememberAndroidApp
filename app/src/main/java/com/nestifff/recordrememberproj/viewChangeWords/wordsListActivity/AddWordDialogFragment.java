@@ -1,4 +1,4 @@
-package com.nestifff.recordrememberproj.viewChangeWords;
+package com.nestifff.recordrememberproj.viewChangeWords.wordsListActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

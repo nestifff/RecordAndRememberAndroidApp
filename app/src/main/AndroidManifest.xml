@@ -15,9 +15,9 @@
         <activity
             android:name=".viewChangeWords.wordsListActivity.WordsListActivity"
             android:launchMode="singleTask"
-            android:parentActivityName=".viewChangeWords.ChooseSetToViewActivity" />
+            android:parentActivityName=".viewChangeWords.chooseSetActivity.ChooseSetToViewActivity" />
         <activity
-            android:name=".viewChangeWords.ChooseSetToViewActivity"
+            android:name=".viewChangeWords.chooseSetActivity.ChooseSetToViewActivity"
             android:launchMode="singleTask"
             android:parentActivityName=".menuMain.MainActivity" />
         <activity

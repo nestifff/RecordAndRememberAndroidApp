@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Programming/NewRecordRemember/app/src/main/res/drawable-v24/delete_rounded_corners.xml" value="0.23958333333333334" />
+        <entry key="..\:/Programming/NewRecordRemember/app/src/main/res/drawable/button_add_word.xml" value="0.11574074074074074" />
+        <entry key="..\:/Programming/NewRecordRemember/app/src/main/res/drawable/delete_white_image.xml" value="0.23958333333333334" />
+        <entry key="..\:/Programming/NewRecordRemember/app/src/main/res/drawable/divider_words_list.xml" value="0.1" />
+        <entry key="..\:/Programming/NewRecordRemember/app/src/main/res/drawable/layout_rounded_cornels.xml" value="0.14635416666666667" />
         <entry key="..\:/Programming/NewRecordRemember/app/src/main/res/layout/view_set_item.xml" value="0.5" />
       </map>
     </option>

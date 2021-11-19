@@ -1,9 +1,8 @@
-package com.nestifff.recordrememberproj.viewChangeWords
+package com.nestifff.recordrememberproj.viewChangeWords.chooseSetActivity
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.nestifff.recordrememberproj.R
 import com.nestifff.recordrememberproj.viewChangeWords.wordsListActivity.WordsListActivity
@@ -26,7 +25,5 @@ class ChooseSetToViewActivity : AppCompatActivity() {
             val intent: Intent = WordsListActivity().newIntent(this@ChooseSetToViewActivity, false)
             startActivity(intent)
         }
-
     }
-
 }

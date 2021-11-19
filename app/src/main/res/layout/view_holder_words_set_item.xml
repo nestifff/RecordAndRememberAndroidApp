@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@drawable/layout_rounded_corners"
     android:paddingStart="16dp"
     android:paddingBottom="8dp"
     android:paddingTop="8dp">
@@ -53,20 +54,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_viewRusWord"
         tools:text="textView_viewEngWord" />
 
-
-    <ImageButton
-        android:id="@+id/button_deleteWord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginEnd="8dp"
-        android:background="@android:color/background_light"
-        android:src="@drawable/delete_word_image"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_viewEngWord"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView_viewRusWord"
-        tools:ignore="RtlHardcoded" />
 
     <LinearLayout
         android:id="@+id/ll_changeWord"

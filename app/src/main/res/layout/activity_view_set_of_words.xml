@@ -2,14 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/light_light_grey">
 
     <TextView
         android:id="@+id/tv_type_of_set_to_view"
         android:textSize="20sp"
         android:paddingTop="8dp"
         android:paddingStart="8dp"
-        android:background="#C1C1C1"
+        android:background="@color/light_grey"
         android:text="default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,12 +32,30 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/view_set_recyclerView"
+        android:paddingTop="16dp"
+        android:clipToPadding="false"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_size_words_set" />
+
+    <Button
+        android:id = "@+id/btn_add_word"
+        android:textSize = "30sp"
+        android:textAlignment = "center"
+        android:text="+"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:background = "@drawable/button_add_word"
+        android:layout_width = "64dp"
+        android:textColor = "@color/white"
+        android:layout_height = "64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

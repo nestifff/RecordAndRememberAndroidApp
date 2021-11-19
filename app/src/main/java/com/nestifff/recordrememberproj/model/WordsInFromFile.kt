@@ -5,11 +5,13 @@ import java.io.*
 
 object WordsInFromFile {
 
-    fun pushWordsInFile(words: List<Word>) {
+    fun pushWordsInFile(words: List<Word>): String {
 
+        var toReturnPath = ""
         try {
             val rootPath: String = Environment.getExternalStorageDirectory()
                     .absolutePath.toString() + "/Documents/"
+            toReturnPath += "Documents/"
 
             val fileName =
                     when (words[0]) {
@@ -17,6 +19,7 @@ object WordsInFromFile {
                         is WordLearned -> "pushedWordsLearned.txt"
                         else -> ""
                     }
+            toReturnPath += fileName
 
             val f = File(rootPath + fileName)
             f.createNewFile()
@@ -29,11 +32,11 @@ object WordsInFromFile {
             out.flush()
             out.close()
 
-
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
+        return toReturnPath
     }
 
     fun pullWordsInProcessFromFile(): MutableList<Word> {
