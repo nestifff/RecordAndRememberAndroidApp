@@ -1,14 +1,9 @@
-package com.nestifff.recordrememberproj.model;
+package com.nestifff.recordrememberproj.model.word;
 
-import com.nestifff.recordrememberproj.model.WordInProcess;import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
 public class WordLearned extends Word {
-
-    public WordLearned(String eng, String rus) {
-        super(eng, rus);
-    }
 
     public WordLearned(UUID id, String eng, String rus) {
         super(id, eng, rus);

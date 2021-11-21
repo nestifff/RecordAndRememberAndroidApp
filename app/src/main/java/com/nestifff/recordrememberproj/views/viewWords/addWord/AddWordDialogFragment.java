@@ -1,4 +1,4 @@
-package com.nestifff.recordrememberproj.viewChangeWords.wordsListActivity;
+package com.nestifff.recordrememberproj.views.viewWords.addWord;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,11 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.nestifff.recordrememberproj.R;
-import com.nestifff.recordrememberproj.model.SetWordsInProcess;
-import com.nestifff.recordrememberproj.model.WordInProcess;
+import com.nestifff.recordrememberproj.model.dao.SetWordsInProcess;
+import com.nestifff.recordrememberproj.model.word.WordInProcess;
 
 public class AddWordDialogFragment extends DialogFragment {
 
@@ -28,18 +29,19 @@ public class AddWordDialogFragment extends DialogFragment {
 
     // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         // Verify that the host activity implements the callback interface
         try {
             listener = (AddWordDialogListener) context;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
-            throw new ClassCastException ("ViewChangeWordActivity must implement NoticeDialogListener");
+            throw new ClassCastException("ViewChangeWordActivity must implement NoticeDialogListener");
         }
     }
 
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -55,18 +57,9 @@ public class AddWordDialogFragment extends DialogFragment {
         editTextEng = v.findViewById(R.id.word_eng);
 
         builder.setTitle("Add new word to your set");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Ok", (dialog, id) -> addWordDialog());
 
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                addWordDialog();
-            }
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int id) { }
+        builder.setNegativeButton("Cancel", (dialog, id) -> {
         });
 
         // Create the AlertDialog object and return it

@@ -1,18 +1,18 @@
-package com.nestifff.recordrememberproj.model;
+package com.nestifff.recordrememberproj.model.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.nestifff.recordrememberproj.database.inProcess.WordInProcessCursorWrapper;
 import com.nestifff.recordrememberproj.database.learned.WordLearnedCursorWrapper;
 import com.nestifff.recordrememberproj.database.learned.WordsLearnedDB;
-import com.nestifff.recordrememberproj.database.learned.WordsLearnedDBHelper;import com.nestifff.recordrememberproj.model.SetWordsInProcess;
+import com.nestifff.recordrememberproj.database.learned.WordsLearnedDBHelper;
+import com.nestifff.recordrememberproj.model.word.Word;
+import com.nestifff.recordrememberproj.model.word.WordInProcess;
+import com.nestifff.recordrememberproj.model.word.WordLearned;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -20,8 +20,8 @@ public class SetWordsLearned {
     
     private static SetWordsLearned setWordsLearned;
 
-    private Context mContext;
-    private SQLiteDatabase mDatabase;
+    private final Context mContext;
+    private final SQLiteDatabase mDatabase;
 
     private List<Word> wordsList;
 
@@ -127,18 +127,15 @@ public class SetWordsLearned {
     private List<Word> getAllWordsFromDB() {
 
         List<Word> words = new ArrayList<>();
-        WordLearnedCursorWrapper cursor = queryWords(null, null);
 
-        try {
+        try (WordLearnedCursorWrapper cursor =
+                     queryWords(null, null)) {
 
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 words.add(cursor.getWord());
                 cursor.moveToNext();
             }
-
-        } finally {
-            cursor.close();
         }
 
         return new ArrayList<>(words);

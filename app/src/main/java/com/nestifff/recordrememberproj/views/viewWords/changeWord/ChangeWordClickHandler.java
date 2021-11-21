@@ -1,4 +1,4 @@
-package com.nestifff.recordrememberproj.viewChangeWords.wordsListActivity;
+package com.nestifff.recordrememberproj.views.viewWords.changeWord;
 
 import android.content.Context;
 import android.text.Editable;
@@ -7,14 +7,13 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nestifff.recordrememberproj.R;
-import com.nestifff.recordrememberproj.model.SetWordsInProcess;
-import com.nestifff.recordrememberproj.model.Word;
-import com.nestifff.recordrememberproj.model.WordInProcess;
+import com.nestifff.recordrememberproj.model.dao.SetWordsInProcess;
+import com.nestifff.recordrememberproj.model.word.Word;
+import com.nestifff.recordrememberproj.model.word.WordInProcess;
 
 public class ChangeWordClickHandler implements View.OnClickListener {
 
@@ -104,7 +103,9 @@ public class ChangeWordClickHandler implements View.OnClickListener {
                 linearLayout.setVisibility(View.GONE);
             });
 
-        } catch (Exception ex){ }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void changeWord() {

@@ -6,8 +6,8 @@ package com.nestifff.recordrememberproj.database.inProcess;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.nestifff.recordrememberproj.model.WordInProcess;
 import com.nestifff.recordrememberproj.database.inProcess.WordsInProcessDB.WordsInProcessTable;
+import com.nestifff.recordrememberproj.model.word.WordInProcess;
 
 import java.util.UUID;
 
@@ -17,14 +17,13 @@ public class WordInProcessCursorWrapper extends CursorWrapper {
         super(cursor);
     }
 
-    public WordInProcess getWord () {
+    public WordInProcess getWord() {
 
         String uuid = getString(getColumnIndex(WordsInProcessTable.Cols.UUID));
         String eng = getString(getColumnIndex(WordsInProcessTable.Cols.ENG));
         String rus = getString(getColumnIndex(WordsInProcessTable.Cols.RUS));
         int numOnFirstTry = getInt(getColumnIndex(WordsInProcessTable.Cols.NUM_ON_FIRST_TRY));
 
-        WordInProcess word = new WordInProcess(UUID.fromString(uuid), eng, rus, numOnFirstTry);
-        return word;
+        return new WordInProcess(UUID.fromString(uuid), eng, rus, numOnFirstTry);
     }
 }

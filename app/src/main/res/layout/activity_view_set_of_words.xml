@@ -1,61 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="2dp"
     android:background="@color/light_light_grey">
 
-    <TextView
-        android:id="@+id/tv_type_of_set_to_view"
-        android:textSize="20sp"
-        android:paddingTop="8dp"
+    <LinearLayout
+        android:id="@+id/ll_switch_learned"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/layout_switch_not_active"
+        android:orientation="vertical"
+        android:paddingEnd="8dp"
         android:paddingStart="8dp"
-        android:background="@color/light_grey"
-        android:text="default"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/ll_switch_in_process"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/ll_switch_in_process"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_size_words_set"
-        android:textSize="12sp"
-        android:paddingBottom="8dp"
-        android:paddingStart="8dp"
-        android:background="#C1C1C1"
-        android:text="default"
-        android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/tv_switch_learned"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:scrollHorizontally="false"
+            android:text="Learned Words"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_size_words_set_learned"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textSize="12sp"
+            tools:text="toolsText1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_switch_in_process"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_type_of_set_to_view" />
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:background="@drawable/layout_switch_not_active"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/ll_switch_archived"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ll_switch_learned"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_switch_in_process"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:gravity="center"
+            android:scrollHorizontally="false"
+            android:text="Words In Process"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/tv_size_words_set_in_process"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:gravity="right"
+            android:textSize="12sp"
+            tools:text="toolsText2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_switch_archived"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:background="@drawable/layout_switch_not_active"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ll_switch_in_process"
+        app:layout_constraintBottom_toBottomOf="@+id/ll_switch_in_process"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_switch_archived"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:scrollHorizontally="false"
+            android:text="Archived Words"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/tv_size_words_set_archived"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textSize="12sp"
+            tools:text="toolsText3" />
+
+    </LinearLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/view_set_recyclerView"
-        android:paddingTop="16dp"
-        android:clipToPadding="false"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:clipToPadding="false"
+        android:paddingTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_size_words_set" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_switch_in_process" />
 
     <Button
-        android:id = "@+id/btn_add_word"
-        android:textSize = "30sp"
-        android:textAlignment = "center"
-        android:text="+"
-        android:layout_marginBottom="16dp"
+        android:id="@+id/btn_add_word"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_marginEnd="16dp"
-        android:background = "@drawable/button_add_word"
-        android:layout_width = "64dp"
-        android:textColor = "@color/white"
-        android:layout_height = "64dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_add_word"
+        android:text="+"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

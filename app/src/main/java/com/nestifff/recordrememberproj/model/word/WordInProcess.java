@@ -1,4 +1,4 @@
-package com.nestifff.recordrememberproj.model;
+package com.nestifff.recordrememberproj.model.word;
 
 import java.util.Objects;
 import java.util.UUID;

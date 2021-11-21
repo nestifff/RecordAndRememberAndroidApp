@@ -1,11 +1,9 @@
 package com.nestifff.recordrememberproj.database.inProcess;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.nestifff.recordrememberproj.model.WordInProcess;
 import com.nestifff.recordrememberproj.database.inProcess.WordsInProcessDB.WordsInProcessTable;
 
 public class WordsInProcessDBHelper extends SQLiteOpenHelper {
@@ -13,14 +11,14 @@ public class WordsInProcessDBHelper extends SQLiteOpenHelper {
     public static final int VERSION = 1;
 
     public WordsInProcessDBHelper(Context context) {
-        super (context, WordsInProcessTable.NAME, null, VERSION);
+        super(context, WordsInProcessTable.NAME, null, VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL("create table " + WordsInProcessTable.NAME + "(" +
-                        " _id integer primary key autoincrement, " +
+                " _id integer primary key autoincrement, " +
                 WordsInProcessTable.Cols.UUID + ", " +
                 WordsInProcessTable.Cols.ENG + ", " +
                 WordsInProcessTable.Cols.RUS + ", " +

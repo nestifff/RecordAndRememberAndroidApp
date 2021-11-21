@@ -1,6 +1,9 @@
-package com.nestifff.recordrememberproj.model
+package com.nestifff.recordrememberproj.model.inFromFiles
 
 import android.os.Environment
+import com.nestifff.recordrememberproj.model.word.Word
+import com.nestifff.recordrememberproj.model.word.WordInProcess
+import com.nestifff.recordrememberproj.model.word.WordLearned
 import java.io.*
 
 object WordsInFromFile {
@@ -58,7 +61,12 @@ object WordsInFromFile {
             while (br.readLine().also { line = it } != null) {
                 rus = line?.let { it.split(",".toRegex(), 0)[0].trim() }
                 eng = line?.let { it.split(",".toRegex(), 0)[1].trim() }
-                words.add(WordInProcess(eng, rus))
+                words.add(
+                    WordInProcess(
+                        eng,
+                        rus
+                    )
+                )
             }
             br.close()
 

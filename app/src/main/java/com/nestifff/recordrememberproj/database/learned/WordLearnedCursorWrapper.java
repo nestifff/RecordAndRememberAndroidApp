@@ -4,8 +4,7 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 
 import com.nestifff.recordrememberproj.database.inProcess.WordsInProcessDB;
-import com.nestifff.recordrememberproj.model.WordInProcess;
-import com.nestifff.recordrememberproj.model.WordLearned;
+import com.nestifff.recordrememberproj.model.word.WordLearned;
 
 import java.util.UUID;
 
@@ -15,13 +14,12 @@ public class WordLearnedCursorWrapper extends CursorWrapper {
         super(cursor);
     }
 
-    public WordLearned getWord () {
+    public WordLearned getWord() {
 
         String uuid = getString(getColumnIndex(WordsInProcessDB.WordsInProcessTable.Cols.UUID));
         String eng = getString(getColumnIndex(WordsInProcessDB.WordsInProcessTable.Cols.ENG));
         String rus = getString(getColumnIndex(WordsInProcessDB.WordsInProcessTable.Cols.RUS));
 
-        WordLearned word = new WordLearned(UUID.fromString(uuid), eng, rus);
-        return word;
+        return new WordLearned(UUID.fromString(uuid), eng, rus);
     }
 }

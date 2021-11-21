@@ -1,14 +1,19 @@
-package com.nestifff.recordrememberproj.viewChangeWords.wordsListActivity
+package com.nestifff.recordrememberproj.views.viewWords.recyclerView
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.nestifff.recordrememberproj.R
-import com.nestifff.recordrememberproj.model.*
 import com.google.android.material.snackbar.Snackbar
+import com.nestifff.recordrememberproj.R
+import com.nestifff.recordrememberproj.model.dao.SetWordsInProcess
+import com.nestifff.recordrememberproj.model.dao.SetWordsLearned
+import com.nestifff.recordrememberproj.model.word.Word
+import com.nestifff.recordrememberproj.model.word.WordInProcess
+import com.nestifff.recordrememberproj.model.word.WordLearned
 import java.util.*
 
 
@@ -19,7 +24,7 @@ class WordsListAdapter(
     val context: Context,
     private val deleteWordListener: DeleteWordOnClick,
 
-) : RecyclerView.Adapter<WordsListViewHolder>() {
+    ) : RecyclerView.Adapter<WordsListViewHolder>() {
 
 
     val id: UUID = UUID.randomUUID()
@@ -33,6 +38,7 @@ class WordsListAdapter(
         return WordsListViewHolder(contactView)
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: WordsListViewHolder, position: Int) {
 
         holder.blockChangeWord.visibility = View.GONE
@@ -40,6 +46,14 @@ class WordsListAdapter(
         val word = wordsSet[position]
         holder.word = word
         holder.changeWordHandler.setWord(word)
+
+        if (word is WordInProcess) {
+            holder.itemView.background = holder.itemView.context
+                .getDrawable(R.drawable.layout_wors_items_in_process)
+        } else if (word is WordLearned) {
+            holder.itemView.background = holder.itemView.context
+                .getDrawable(R.drawable.layout_wors_items_learned)
+        }
 
         val rusTextView = holder.rusTextView
         rusTextView.text = word.rus
@@ -53,17 +67,17 @@ class WordsListAdapter(
     fun addWordInRV(word: Word?) {
 
         val position = wordsSet.indexOf(word)
-        setEmptyViewVisibility()
+//        setEmptyViewVisibility()
         notifyItemInserted(position)
     }
 
-    private fun setEmptyViewVisibility() {
+    /*private fun setEmptyViewVisibility() {
         if (itemCount == 0) {
             view?.visibility = View.GONE
         } else {
             view?.visibility = View.VISIBLE
         }
-    }
+    }*/
 
     fun deleteWord(word: Word) {
 
@@ -78,7 +92,7 @@ class WordsListAdapter(
 
         wordsSet.remove(word)
 
-        setEmptyViewVisibility()
+//        setEmptyViewVisibility()
         notifyItemRemoved(position)
 
         deleteWordListener.onDelete(word)
@@ -91,9 +105,9 @@ class WordsListAdapter(
         if (view == null) return
 
         val snackbar: Snackbar = Snackbar.make(
-                view!!,
-                "Delete: ${word.rus} - ${word.eng}",
-                Snackbar.LENGTH_LONG
+            view!!,
+            "Delete: ${word.rus} - ${word.eng}",
+            Snackbar.LENGTH_LONG
         )
         snackbar.setAction("Undo") { view ->
             if (view != null) {
@@ -115,7 +129,6 @@ class WordsListAdapter(
         }
         snackbar.setActionTextColor(ContextCompat.getColor(context, R.color.purple_200))
         snackbar.show()
-
     }
 
     fun deleteWord(position: Int) {

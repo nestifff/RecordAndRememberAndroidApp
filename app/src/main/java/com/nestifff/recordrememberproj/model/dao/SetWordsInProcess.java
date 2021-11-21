@@ -1,19 +1,20 @@
-package com.nestifff.recordrememberproj.model;
+package com.nestifff.recordrememberproj.model.dao;
 
 import static com.nestifff.recordremember.GlobalVariablesKt.NUM_ON_FIRST_TRY_TO_MOVE;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.nestifff.recordrememberproj.database.inProcess.WordInProcessCursorWrapper;
 import com.nestifff.recordrememberproj.database.inProcess.WordsInProcessDB.WordsInProcessTable;
 import com.nestifff.recordrememberproj.database.inProcess.WordsInProcessDBHelper;
+import com.nestifff.recordrememberproj.model.word.Word;
+import com.nestifff.recordrememberproj.model.word.WordInProcess;
+import com.nestifff.recordrememberproj.model.word.WordLearned;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -22,8 +23,8 @@ public class SetWordsInProcess {
 
     private static SetWordsInProcess setWordsInProcess;
 
-    private Context mContext;
-    private SQLiteDatabase mDatabase;
+    private final Context mContext;
+    private final SQLiteDatabase mDatabase;
 
     private List<Word> wordsList;
 
@@ -123,7 +124,7 @@ public class SetWordsInProcess {
     public List<Word> getWords(int count) throws Exception {
 
         if (wordsList == null) {
-           wordsList = getAllWordsFromDB();
+            wordsList = getAllWordsFromDB();
         }
 
         List<Word> words = new ArrayList<>();
@@ -160,18 +161,15 @@ public class SetWordsInProcess {
     private List<Word> getAllWordsFromDB() {
 
         List<Word> words = new ArrayList<>();
-        WordInProcessCursorWrapper cursor = queryWords(null, null);
 
-        try {
+        try (WordInProcessCursorWrapper cursor =
+                     queryWords(null, null)) {
 
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 words.add(cursor.getWord());
                 cursor.moveToNext();
             }
-
-        } finally {
-            cursor.close();
         }
 
         return new ArrayList<>(words);

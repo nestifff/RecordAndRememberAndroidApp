@@ -1,15 +1,14 @@
-package com.nestifff.recordrememberproj.viewChangeWords.wordsListActivity.deleteWord
+package com.nestifff.recordrememberproj.views.viewWords.deleteWord
 
 import android.annotation.SuppressLint
 import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.nestifff.recordrememberproj.R
-import com.nestifff.recordrememberproj.viewChangeWords.wordsListActivity.WordsListAdapter
+import com.nestifff.recordrememberproj.views.viewWords.recyclerView.WordsListAdapter
 
 
 class DeleteWordCallback(
@@ -20,8 +19,10 @@ class DeleteWordCallback(
         adapter.context,
         R.drawable.delete_white_image
     )
+
     @SuppressLint("UseCompatLoadingForDrawables")
-    private var background: Drawable = adapter.context.getDrawable(R.drawable.delete_rounded_corners)!!
+    private var background: Drawable =
+        adapter.context.getDrawable(R.drawable.delete_rounded_corners)!!
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val position = viewHolder.adapterPosition

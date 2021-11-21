@@ -1,5 +1,6 @@
-package com.nestifff.recordrememberproj.learnWords;
+package com.nestifff.recordrememberproj.views.learnWords;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -15,13 +16,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nestifff.recordrememberproj.menuMain.MainActivity;
 import com.nestifff.recordrememberproj.R;
-import com.nestifff.recordrememberproj.model.SetWordsInProcess;
-import com.nestifff.recordrememberproj.model.SetWordsLearned;
-import com.nestifff.recordrememberproj.model.Word;
-import com.nestifff.recordrememberproj.model.WordInProcess;
-import com.nestifff.recordrememberproj.model.WordLearned;
+import com.nestifff.recordrememberproj.model.dao.SetWordsInProcess;
+import com.nestifff.recordrememberproj.model.dao.SetWordsLearned;
+import com.nestifff.recordrememberproj.model.word.Word;
+import com.nestifff.recordrememberproj.model.word.WordInProcess;
+import com.nestifff.recordrememberproj.model.word.WordLearned;
+import com.nestifff.recordrememberproj.views.menuMain.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,7 +78,7 @@ public class LearnWordsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
 
         super.onSaveInstanceState(outState);
         Log.i(TAG, "onSaveInstanceState");
@@ -133,61 +134,51 @@ public class LearnWordsActivity extends AppCompatActivity {
             nextWordButton.setEnabled(false);
 
             // обработка введенного ответа
-            answerEditText.setOnKeyListener(new View.OnKeyListener() {
+            answerEditText.setOnKeyListener((v, keyCode, event) -> {
+                if (event.getAction() == KeyEvent.ACTION_DOWN &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
 
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if (event.getAction() == KeyEvent.ACTION_DOWN &&
-                            (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    answer = answerEditText.getText().toString();
+                    // разрешить кнопку next
+                    nextWordButton.setEnabled(true);
 
-                        answer = answerEditText.getText().toString();
-                        // разрешить кнопку next
-                        nextWordButton.setEnabled(true);
-
-                        // запретить поле для ввода
-                        // показать ответ
-                        determineAndShowStatusOfAnswer();
-                        answerEditText.setEnabled(false);
-                        return true;
-                    }
-
-                    return false;
+                    // запретить поле для ввода
+                    // показать ответ
+                    determineAndShowStatusOfAnswer();
+                    answerEditText.setEnabled(false);
+                    return true;
                 }
+
+                return false;
             });
 
-            goHomeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(LearnWordsActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
+            goHomeButton.setOnClickListener(v -> {
+                Intent intent = new Intent(LearnWordsActivity.this, MainActivity.class);
+                startActivity(intent);
             });
 
             // спрашиваем новое слово
-            nextWordButton.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint("NewApi")
-                @Override
-                public void onClick(View v) {
+            nextWordButton.setOnClickListener(v -> {
 
-                    nextWordButton.setEnabled(false);
-                    answerEditText.setEnabled(true);
-                    answerStatusText.setText("");
-                    answerEditText.setText("");
+                nextWordButton.setEnabled(false);
+                answerEditText.setEnabled(true);
+                answerStatusText.setText("");
+                answerEditText.setText("");
 
-                    // открыть клавиатуру
-                    answerEditText.requestFocus();
-                    @SuppressLint({"NewApi", "LocalSuppress"}) InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.showSoftInput(answerEditText, InputMethodManager.SHOW_IMPLICIT);
+                // открыть клавиатуру
+                answerEditText.requestFocus();
+                @SuppressLint({"NewApi", "LocalSuppress"}) InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(answerEditText, InputMethodManager.SHOW_IMPLICIT);
 
-                    if (words.size() != 0) {
-                        askWord(true);
+                if (words.size() != 0) {
+                    askWord(true);
+                } else {
+                    if (isInProcess) {
+                        goToResultsInProcess();
                     } else {
-                        if (isInProcess) {
-                            goToResultsInProcess();
-                        } else {
-                            goToResultsLearned();
-                        }
-                        Toast.makeText(LearnWordsActivity.this, "You are win!", Toast.LENGTH_SHORT).show();
+                        goToResultsLearned();
                     }
+                    Toast.makeText(LearnWordsActivity.this, "You are win!", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -302,7 +293,7 @@ public class LearnWordsActivity extends AppCompatActivity {
         List<Integer> listAttemptsNum = new ArrayList<>(sortedResults.values());
         List<Integer> listOnFirstTryInds = new ArrayList<>();
 
-        String text = "";
+        StringBuilder text = new StringBuilder();
         int onTheFirstTry = 0;
 
         for (int i = 0; i < listAttemptsNum.size(); ++i) {
@@ -313,18 +304,25 @@ public class LearnWordsActivity extends AppCompatActivity {
             listOnFirstTryInds.add(i);
         }
 
-        text += "On the first try " + onTheFirstTry + " words / " + wordCount + "\n" + "\n";
+        text.append("On the first try ")
+                .append(onTheFirstTry)
+                .append(" words / ")
+                .append(wordCount)
+                .append("\n")
+                .append("\n");
 
         for (int i = 1; i <= listAttemptsNum.size(); ++i) {
             if ((listAttemptsNum.get(listWords.size() - i) != 1) && i == 1) {
-                text += "The most difficult words: \n";
+                text.append("The most difficult words: \n");
             }
             if (listAttemptsNum.get(listWords.size() - i) == 1) {
                 break;
             }
-            text += listWords.get(listWords.size() - i).eng + " - " +
-                    listWords.get(listWords.size() - i).rus + ": " +
-                    listAttemptsNum.get(listWords.size() - i) + "\n";
+            text.append(listWords.get(listWords.size() - i).eng)
+                    .append(" - ")
+                    .append(listWords.get(listWords.size() - i).rus)
+                    .append(": ").append(listAttemptsNum.get(listWords.size() - i))
+                    .append("\n");
         }
 
         int numOfAttempts = 0;
@@ -334,19 +332,19 @@ public class LearnWordsActivity extends AppCompatActivity {
 
         List<Word> movedInLearned = setNumOnFirstTryInProcess(listWords, listOnFirstTryInds);
 
-        text += "\n";
+        text.append("\n");
 
         double av = (double) numOfAttempts / (double) listWords.size();
-        text += "Average number of attempts for one word is " + av + "\n";
+        text.append("Average number of attempts for one word is ").append(av).append("\n");
 
         if (movedInLearned.size() != 0) {
-            text += "in learned moved next words: \n";
+            text.append("in learned moved next words: \n");
             for(Word word : movedInLearned) {
-                text += word.rus + " - " + word.eng + "\n";
+                text.append(word.rus).append(" - ").append(word.eng).append("\n");
             }
         }
 
-        resText.setText(text);
+        resText.setText(text.toString());
     }
 
     void goToResultsLearned() {
@@ -358,7 +356,7 @@ public class LearnWordsActivity extends AppCompatActivity {
         List<Integer> listAttemptsNum = new ArrayList<>(sortedResults.values());
         List<Integer> listNotOnFirstTryInds = new ArrayList<>();
 
-        String text = new String();
+        StringBuilder text = new StringBuilder();
         int notOnTheFirstTry = 0;
 
         for (int i = 0; i < listAttemptsNum.size(); ++i) {
@@ -368,11 +366,19 @@ public class LearnWordsActivity extends AppCompatActivity {
             }
         }
 
-        text += "Not on the first try " + notOnTheFirstTry + " words / " + wordCount + "\n" + "\n";
+        text.append("Not on the first try ")
+                .append(notOnTheFirstTry)
+                .append(" words / ")
+                .append(wordCount)
+                .append("\n")
+                .append("\n");
 
         for (int i = 0; i < listNotOnFirstTryInds.size(); ++i) {
             int ind = listNotOnFirstTryInds.get(i);
-            text += listWords.get(ind).rus + " - " + listWords.get(ind).eng + "\n";
+            text.append(listWords.get(ind).rus)
+                    .append(" - ")
+                    .append(listWords.get(ind).eng)
+                    .append("\n");
         }
 
         int numOfAttempts = 0;
@@ -382,12 +388,12 @@ public class LearnWordsActivity extends AppCompatActivity {
 
         moveNotOnFirstTryLearned(listWords, listNotOnFirstTryInds);
 
-        text += "\n";
+        text.append("\n");
 
         double av = (double) numOfAttempts / (double) listWords.size();
-        text += "Average number of attempts for one word is " + av + "\n";
+        text.append("Average number of attempts for one word is ").append(av).append("\n");
 
-        resText.setText(text);
+        resText.setText(text.toString());
     }
 
     // inds.get(i) соотвествует words.get(i)

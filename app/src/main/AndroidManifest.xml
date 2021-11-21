@@ -13,22 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecordRemember" >
         <activity
-            android:name=".viewChangeWords.wordsListActivity.WordsListActivity"
+            android:name="com.nestifff.recordrememberproj.views.viewWords.WordsListActivity"
             android:launchMode="singleTask"
-            android:parentActivityName=".viewChangeWords.chooseSetActivity.ChooseSetToViewActivity" />
+            android:parentActivityName="com.nestifff.recordrememberproj.views.menuMain.MainActivity" />
         <activity
-            android:name=".viewChangeWords.chooseSetActivity.ChooseSetToViewActivity"
+            android:name=".views.learnWords.ChooseSetToLearnActivity"
             android:launchMode="singleTask"
-            android:parentActivityName=".menuMain.MainActivity" />
+            android:parentActivityName="com.nestifff.recordrememberproj.views.menuMain.MainActivity" />
         <activity
-            android:name=".learnWords.ChooseSetToLearnActivity"
-            android:launchMode="singleTask"
-            android:parentActivityName=".menuMain.MainActivity" />
+            android:name="com.nestifff.recordrememberproj.views.learnWords.LearnWordsActivity"
+            android:parentActivityName="com.nestifff.recordrememberproj.views.learnWords.ChooseSetToLearnActivity" />
         <activity
-            android:name=".learnWords.LearnWordsActivity"
-            android:parentActivityName=".learnWords.ChooseSetToLearnActivity" />
-        <activity
-            android:name=".menuMain.MainActivity"
+            android:name="com.nestifff.recordrememberproj.views.menuMain.MainActivity"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>
